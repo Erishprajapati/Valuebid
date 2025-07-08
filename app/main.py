@@ -16,6 +16,6 @@ def get_db():
     finally:
         db.close()
 
-@app.post('/create_user', tags=["user"])
-def register_user(request:schemas.User, db:Session = Depends(get_db))
+# @app.post('/create_user', tags=["user"])
+# def register_user(request:schemas.User, db:Session = Depends(get_db))
     
