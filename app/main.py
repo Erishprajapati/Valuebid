@@ -1,21 +1,10 @@
 from fastapi import FastAPI
-from app.database.connection import Base, engine, SessionLocal
-
-app = FastAPI()
-
-#declaring the root of the system where user lands
-@app.get("/")
-def read_root():
-    return {"Message": "Welcome to system"}
+from app.database.connection import engine,Base
+from app.routers import auth, users, items, bids
+app = FastAPI() #creating app to start 
 
 Base.metadata.create_all(bind = engine)
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-# @app.post('/create_user', tags=["user"])
-# def register_user(request:schemas.User, db:Session = Depends(get_db))
-    
+app.include_router(auth.router)
+app.include_router(users.router)
+app.include_router(items.router)
+app.include_router(bids.router)

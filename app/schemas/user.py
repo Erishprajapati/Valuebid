@@ -15,12 +15,13 @@ class UserOut(BaseModel):
     role: str
 
     class Config: 
-        orm_mode = True
+        from_attributes = True
+
 
 class UserLogin(BaseModel):
     username: str
     password: str
 
 class Token(BaseModel):
-    access_token = str
+    access_token: str
     token_type: str = "bearer"
